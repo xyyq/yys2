@@ -26,24 +26,23 @@ logger = logging.getLogger()
 
 time.sleep(3)
 
-jiejietupo = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\jiejietupo.png'
-jingong = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\jingong.png'
-victory = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\victory.png'
+jiejietupo = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\tupo\jiejietupo.png'
+jingong = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\tupo\jinggong.png'
+victory = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\tupo\victory.png'
 
-tupoConfirm = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\tupoConfirm.png'
-tiaozhanagain = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\tiaozhanagain.png'
+tupoConfirm = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\tupo\tupoConfirm.png'
+tiaozhanagain = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\tupo\tiaozhanagain.png'
 print(pyautogui.locateCenterOnScreen(jiejietupo, confidence=0.9))
 position = pyautogui.locateCenterOnScreen(jiejietupo, confidence=0.9)
 # if 攻破0 进4 退4
 
-firstPosition = pyautogui.Point(position.x - 350, position.y + 140)
+firstPosition = pyautogui.Point(position.x - 350, position.y + 120)
 
 
 def exit2topo():
     print("退出突破")
-    time.sleep(2)
     pyautogui.press("esc")
-    time.sleep(2)
+    time.sleep(0.5)
 
     AutoGuiUtil.clickImg(tupoConfirm)
     time.sleep(2)
@@ -62,14 +61,14 @@ def intoTupo(position):
     AutoGuiUtil.clickImg(jingong)
 
 
-def shuaxing(firstPosition):
+def shuaxing(firstPosition, position):
     for i in range(4):
         if not AutoGuiUtil.findImg(jiejietupo):
             clickposition(position)
         intoTupo(firstPosition)
-        time.sleep(2)
+        time.sleep(1)
         exit2topo()
-        time.sleep(3)
+        time.sleep(2)
 
 
 def getRes(currentPosition):
@@ -90,7 +89,7 @@ def getRes(currentPosition):
         intoTupo(currentPosition)
         return 0
     print("fight")
-    time.sleep(15)
+    time.sleep(5)
     return 0
 
 
@@ -103,10 +102,10 @@ def jingongs(firstPosition):
             print("第 %s行，第 %s列" % (x + 1, y + 1))
             times = 0
             currentPosition = pyautogui.position(firstPosition.x + x * 350, firstPosition.y + y * 140)
-            while getRes(currentPosition) == 0 & times < 30:
+            while getRes(currentPosition) == 0 and times < 50:
                 print("等待挑战成功")
                 times = times + 1
-            if times >= 30:
+            if times >= 50:
                 return "fail"
 
 def clickposition(position):
@@ -121,11 +120,13 @@ if __name__ == '__main__':
     # if 攻破0 进4 退4
 
     firstPosition = pyautogui.Point(position.x - 350, position.y + 140)
-    for i in range(3):
-        time.sleep(6)
-        clickposition(position)
-        time.sleep(3)
+    for i in range(2):
+        time.sleep(5)
 
-        shuaxing(firstPosition)
+        clickposition(position)
+        time.sleep(2)
+        clickposition(position)
+
+        shuaxing(firstPosition, position)
         if jingongs(firstPosition) == "fail":
             print("打不过， 算了")

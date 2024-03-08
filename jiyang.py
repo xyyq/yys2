@@ -1,5 +1,6 @@
 import random
 import string
+from datetime import datetime
 from threading import Thread
 
 import pyautogui
@@ -8,25 +9,25 @@ import time
 import AutoGuiUtil
 import LogUtil
 
-gouyu59 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\gouyu59.png'
-gouyu76 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\gouyu76.png'
-gouyu67 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\gouyu67.png'
-gouyu50 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\gouyu50.png'
-douyu6 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\douyu6.png'
-douyu5 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\douyu5.png'
+gouyu59 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\gouyu59.png'
+gouyu76 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\gouyu76.png'
+gouyu67 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\gouyu67.png'
+gouyu50 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\gouyu50.png'
+douyu6 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\douyu6.png'
+douyu5 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\douyu5.png'
 
-jiyang = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\jiyang.png'
-in_jiejie = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\in_jiejie.png'
-haoyou = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\haoyou.png'
-confirm = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\confirm.png'
-jiejieFlag = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\jiejieFlag.png'
-injiejieButton = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\injiejieButton.png'
-reject = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\reject.png'
-allButton = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\allButton.png'
-noResource = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\noResource.png'
-exitGame = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\exitGame.png'
-cancelExit = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\cancelExit.png'
-inJiyangJiejie = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\inJiyangJiejie.png'
+jiyang = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\jiyang.png'
+in_jiejie = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\in_jiejie.png'
+haoyou = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\haoyou.png'
+confirm = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\confirm.png'
+jiejieFlag = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\jiejieFlag.png'
+injiejieButton = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\injiejieButton.png'
+reject = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\reject.png'
+allButton = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\allButton.png'
+noResource = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\noResource.png'
+exitGame = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\exitGame.png'
+cancelExit = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\cancelExit.png'
+inJiyangJiejie = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\inJiyangJiejie.png'
 
 time.sleep(3)
 
@@ -49,7 +50,14 @@ def exitCurent():
 
 
 def back2Top():
-    for k in range(10):
+    print("上顶")
+    for k in range(100):
+        pyautogui.scroll(1)
+
+
+def nextSc():
+    print("下一屏")
+    for k in range(6):
         pyautogui.scroll(-1)
 
 
@@ -65,7 +73,7 @@ def findResource(cardItem):
             if find:
                 break
             for j in range(4):
-                pyautogui.click(xhaoyou + 200, yhaoyou + 120 * (j + 1), clicks=1,
+                pyautogui.click(xhaoyou + 200, yhaoyou + 112 * (j + 1), clicks=1,
                                 interval=0.4 + random.randint(-10, 10) / 100,
                                 duration=0.3 + random.randint(-10, 10) / 100, button="left")
 
@@ -80,7 +88,7 @@ def findResource(cardItem):
                 time.sleep(3)
             if find:
                 break
-            back2Top()
+            nextSc()
 
         time.sleep(3)
         if not find:
@@ -108,6 +116,8 @@ def findResource(cardItem):
     except Exception as e:
         LogUtil.logger.error("findResource error %s" % e)
         return False
+
+
 def inJiyang():
     try:
         if AutoGuiUtil.findImg(jiyang):
@@ -116,8 +126,12 @@ def inJiyang():
         while not AutoGuiUtil.findImg(jiejieFlag):
             exit2jiejie()
             time.sleep(3)
-        AutoGuiUtil.clickImg(injiejieButton)
-        pass
+        print("move ")
+        jiejieFlagPoint = AutoGuiUtil.getPosition(jiejieFlag)
+        pyautogui.moveTo(jiejieFlagPoint.x, jiejieFlagPoint.y)
+        time.sleep(10)
+        AutoGuiUtil.clickCenter()
+
     except Exception as e:
         LogUtil.logger.error("inJiyang error %s" % e)
 
@@ -144,18 +158,16 @@ def exit2jiejie():
         LogUtil.logger.error("exit2jiejie error %s" % e)
 
 
-
-def waitJiyang():
+def waitJiyang(now):
     try:
-
+        if (datetime.now() - now).seconds > 60 * 30:
+            return "time out"
         inJiyang()
         LogUtil.logger.info("进入 寄养")
         time.sleep(30)
-
         if not AutoGuiUtil.findImg(jiyang):
             time.sleep(30)
             exit2jiejie()
-            waitJiyang()
         pass
     except Exception as e:
         LogUtil.logger.error("waitJiyang error %s" % e)
@@ -163,7 +175,18 @@ def waitJiyang():
 
 def startJiyang():
     try:
-        waitJiyang()
+        now = datetime.now()
+        while 1:
+            if (datetime.now() - now).seconds > 60 * 30:
+                LogUtil.logger.warning("超时，提前结束")
+                return
+            inJiyang()
+            if not AutoGuiUtil.findImg(jiyang):
+                time.sleep(3)
+                exit2jiejie()
+                continue
+            if AutoGuiUtil.findImg(jiyang):
+                break
         inJiyang()
         if AutoGuiUtil.findImg(jiyang):
             AutoGuiUtil.clickImg(jiyang)
@@ -181,13 +204,11 @@ def startJiyang():
                     global jiyangSuccess
                     jiyangSuccess = True
                     break
-                for i in range(30):
-                    pyautogui.scroll(1)
+                back2Top()
             return False
         pass
     except Exception as e:
         LogUtil.logger.error("startJiyang error %s" % e)
-
 
 
 def task():

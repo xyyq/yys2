@@ -18,10 +18,9 @@ logging.config.fileConfig(r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\config\loggi
 
 # 创建 logger
 logger = logging.getLogger()
-jiejieFlag = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\jiejieFlag.png'
 
-reject = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\reject.png'
-accept = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\accept.png'
+reject = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\reject.png'
+accept = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\accept.png'
 
 
 def job():
@@ -30,31 +29,30 @@ def job():
 
 
 # 每隔5分钟运行一次job函数
-schedule.every(340).minutes.do(job)
+schedule.every().hour.at(":42").do(job)
 
 
 def task():
     while 1:
-        if jiyang.jiyangSuccess:
-            LogUtil.logger.info("寄养完成，多线程结束")
-            return
+
         if AutoGuiUtil.findImg(reject):
             logger.info("多线程 发现任务")
             now = datetime.datetime.now()
             if now.hour < 6:
-                AutoGuiUtil.clickImg(reject)
+                AutoGuiUtil.clickImgNolog(reject)
             else:
-                AutoGuiUtil.clickImg(accept)
+                AutoGuiUtil.clickImgNolog(accept)
         logger.info("多线程未发现任务")
-        time.sleep(1)
+        time.sleep(3)
 
 if __name__ == '__main__':
     t1 = Thread(target=task)
+
     # 启动
     t1.start()
     while True:
         # 等待1秒钟
-        time.sleep(10)
+        time.sleep(20)
         print("kaishi")
         AutoGuiUtil.clickCurrent()
         # 如果当前时间到达设置的定时任务时间点，则调用对应的函数

@@ -52,7 +52,7 @@ class Hun11ConcreteClass(AbstractChallengeClass):
         return "魂土"
 
     def getImg(self):
-        return "/Users/sifatasinant/Downloads/hun11.PNG"
+        return r"C:\Users\VIVIANiyq\Desktop\TEST\hun11.PNG"
 
 
 # 子类必须实现所有抽象方法才能被实例化
@@ -135,7 +135,7 @@ def challengeSuccess(img, confidence):
     try:
         location = pyautogui.locateCenterOnScreen(img, confidence=confidence)
         # 先左键点击挑战
-        pyautogui.click(location.x / 2, location.y / 2, clicks=4, interval=0.4 + random.randint(-10, 10) / 100,
+        pyautogui.click(location.x , location.y , clicks=4, interval=0.4 + random.randint(-10, 10) / 100,
                         duration=0.3 + random.randint(-10, 10) / 100, button="left")
         print("单击左键", img)
         time.sleep(0.5)

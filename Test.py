@@ -1,34 +1,26 @@
 import time
 import random
+from datetime import datetime
+
 import pyautogui
 
 import AutoGuiUtil
 
 allButton = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\allButton.png'
 
+accept = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\accept.png'
+mumuFlag = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\mumuFlag.png'
+AutoGuiUtil.clickImg(mumuFlag)
+point = AutoGuiUtil.getPosition(mumuFlag)
 
-injiejieButton = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\injiejieButton.png'
-
-AutoGuiUtil.clickImg(allButton)
-
-def clickimg(img):
-    try:
-
-        location = pyautogui.locateCenterOnScreen(img, confidence=0.9)
-        # 先左键点击挑战
-        pyautogui.click(location.x / 2, location.y / 2, clicks=4, interval=0.4 + random.randint(-10, 10) / 100,
-                        duration=0.3 + random.randint(-10, 10) / 100, button="left")
-        print("单击左键", img)
-        time.sleep(0.5)
-        return True
-
-    except Exception as e:
-        print("未找到图片", img)
-        print(e)
-        return False
-
-
+print("x {}, y{}".format(point.x, point.y ))
 time.sleep(3)
+
+print(pyautogui.position())
+time.sleep(3)
+print(pyautogui.position())
+time.sleep(3)
+print(pyautogui.position())
 
 ## 第28 Point(x=922, y=535)
 
@@ -55,21 +47,11 @@ time.sleep(3)
 ##print("x{},y{}".format(x, y))
 
 ##
-##
-time.sleep(2)
-
-pyautogui.press("esc")
-print("11")
-time.sleep(2)
-pyautogui.press("esc")
-print("22")
-
-print(pyautogui.position())
-
-xhaoyou, yhaoyou = pyautogui.locateCenterOnScreen(haoyou, confidence=0.8)
-for i in range(4):
-    pyautogui.click(xhaoyou + 200, yhaoyou + 120 * (i + 1), clicks=1, interval=0.4 + random.randint(-10, 10) / 100,
-                    duration=0.3 + random.randint(-10, 10) / 100, button="left")
+#
+# xhaoyou, yhaoyou = pyautogui.locateCenterOnScreen(haoyou, confidence=0.8)
+# for i in range(4):
+#     pyautogui.click(xhaoyou + 200, yhaoyou + 120 * (i + 1), clicks=1, interval=0.4 + random.randint(-10, 10) / 100,
+#                     duration=0.3 + random.randint(-10, 10) / 100, button="left")
 
 # clickimg(img)
 
