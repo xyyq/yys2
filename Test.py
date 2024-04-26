@@ -10,6 +10,8 @@ allButton = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yys\allButton.png
 
 accept = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\accept.png'
 mumuFlag = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\mumuFlag.png'
+for i in range(3):
+    print(i)
 AutoGuiUtil.clickImg(mumuFlag)
 point = AutoGuiUtil.getPosition(mumuFlag)
 

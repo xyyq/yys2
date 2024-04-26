@@ -19,7 +19,8 @@ def clickImg(img):
     try:
         location = pyautogui.locateCenterOnScreen(img, confidence=0.9)
         # 先左键点击挑战
-        pyautogui.click(location.x, location.y, clicks=1, interval=0.4 + random.randint(-10, 10) / 100,
+        pyautogui.click(location.x + random.randint(-10, 10) / 2,
+                        location.y + random.randint(-10, 10) / 2, clicks=1, interval=0.4 + random.randint(-10, 10) / 100,
                         duration=0.3 + random.randint(-10, 10) / 100, button="left")
         LogUtil.logger.info("单击左键 %s" % img)
         time.sleep(0.5)
@@ -32,7 +33,8 @@ def clickImgNolog(img):
     try:
         location = pyautogui.locateCenterOnScreen(img, confidence=0.9)
         # 先左键点击挑战
-        pyautogui.click(location.x, location.y, clicks=1, interval=0.4 + random.randint(-10, 10) / 100,
+        pyautogui.click(location.x + random.randint(-10, 10) / 2,
+                        location.y + random.randint(-10, 10) / 2 , clicks=1, interval=0.4 + random.randint(-10, 10) / 100,
                         duration=0.3 + random.randint(-10, 10) / 100, button="left")
         time.sleep(0.5)
         return True
@@ -42,11 +44,11 @@ def clickImgNolog(img):
 
 
 def clickpositions(position):
-    pyautogui.click(position.x, position.y, clicks=1,
+    pyautogui.click(position.x + random.randint(-10, 10) / 2, position.y + random.randint(-10, 10) / 2, clicks=1,
                     interval=0.4 + random.randint(-10, 10) / 100,
                     duration=0.3 + random.randint(-10, 10) / 100, button="left")
 def clickCurrent():
-    pyautogui.click(pyautogui.position().x, pyautogui.position().y, clicks=1,
+    pyautogui.click(pyautogui.position().x+ random.randint(-10, 10) / 2, pyautogui.position().y+ random.randint(-10, 10) / 2, clicks=1,
                     interval=0.4 + random.randint(-10, 10) / 100,
                     duration=0.3 + random.randint(-10, 10) / 100, button="left")
 

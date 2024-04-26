@@ -42,31 +42,34 @@ firstPosition = pyautogui.Point(position.x - 350, position.y + 120)
 def exit2topo():
     print("退出突破")
     pyautogui.press("esc")
-    time.sleep(2)
 
+    while not AutoGuiUtil.findImg(tupoConfirm):
+        time.sleep(0.2)
+        pyautogui.press("esc")
     AutoGuiUtil.clickImg(tupoConfirm)
-    time.sleep(3)
-    pyautogui.click(firstPosition.x, firstPosition.y, clicks=1,
-                    interval=0.4 + random.randint(-10, 10) / 100,
-                    duration=0.3 + random.randint(-10, 10) / 100, button="left")
+    time.sleep(1)
+    while not AutoGuiUtil.findImg(jiejietupo):
+        time.sleep(0.5)
+        pyautogui.click(firstPosition.x, firstPosition.y, clicks=1,
+                        interval=0.4 + random.randint(-10, 10) / 100,
+                        duration=0.3 + random.randint(-10, 10) / 100, button="left")
 
 
 def intoTupo(position):
     print("点击突破挑战")
     time.sleep(2)
-    pyautogui.click(position.x, position.y, clicks=1,
+    pyautogui.click(position.x + random.randint(-10, 10) / 2, position.y+ random.randint(-10, 10) / 2, clicks=1,
                     interval=0.4 + random.randint(-10, 10) / 100,
                     duration=0.3 + random.randint(-10, 10) / 100, button="left")
 
     AutoGuiUtil.clickImg(jingong)
 
 
-def shuaxing(firstPosition, position):
+def shuaxing(currentPosition, position):
     for i in range(4):
         if not AutoGuiUtil.findImg(jiejietupo):
             clickposition(position)
-        intoTupo(firstPosition)
-        time.sleep(2)
+        intoTupo(currentPosition)
         exit2topo()
         time.sleep(2)
 
@@ -93,23 +96,33 @@ def getRes(currentPosition):
     return 0
 
 
-def jingongs(firstPosition):
+def jingongs(firstPosition, skip, first, position):
     for x in range(3):
         for y in range(3):
+            clickposition(position)
+
+            currentPosition = pyautogui.position(firstPosition.x + x * 350, firstPosition.y + y * 140)
+
+            if x * 3 + y < skip and first == 0:
+                continue
+            if x == 2 and y == 2:
+                shuaxing(currentPosition, position)
             time.sleep(2)
             clickposition(position)
             time.sleep(1)
             print("第 %s行，第 %s列" % (x + 1, y + 1))
             times = 0
-            currentPosition = pyautogui.position(firstPosition.x + x * 350, firstPosition.y + y * 140)
             while getRes(currentPosition) == 0 and times < 50:
                 print("等待挑战成功")
                 times = times + 1
             if times >= 50:
+                print("fail")
+
                 return "fail"
 
+
 def clickposition(position):
-    pyautogui.click(position.x, position.y, clicks=1,
+    pyautogui.click(position.x+ random.randint(-10, 10) / 2, position.y+ random.randint(-10, 10) / 2, clicks=2,
                     interval=0.4 + random.randint(-10, 10) / 100,
                     duration=0.3 + random.randint(-10, 10) / 100, button="left")
 
@@ -120,13 +133,13 @@ if __name__ == '__main__':
     # if 攻破0 进4 退4
 
     firstPosition = pyautogui.Point(position.x - 350, position.y + 140)
-    for i in range(2):
-        time.sleep(5)
+    skip = 3
+    for i in range(4):
+        time.sleep(3)
 
         clickposition(position)
         time.sleep(2)
         clickposition(position)
 
-        shuaxing(firstPosition, position)
-        if jingongs(firstPosition) == "fail":
+        if jingongs(firstPosition, skip, i, position) == "fail":
             print("打不过， 算了")

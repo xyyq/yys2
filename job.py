@@ -21,6 +21,7 @@ logger = logging.getLogger()
 
 reject = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\reject.png'
 accept = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\accept.png'
+xuanshang30 = r'C:\Users\VIVIANIYQ\PycharmProjects\yys2\resource\yysSH\jiyang\xuanshang30.png'
 
 
 def job():
@@ -31,17 +32,15 @@ def job():
 # 每隔5分钟运行一次job函数
 schedule.every().hour.at(":42").do(job)
 
-
 def task():
     while 1:
 
         if AutoGuiUtil.findImg(reject):
             logger.info("多线程 发现任务")
-            now = datetime.datetime.now()
-            if now.hour < 6:
-                AutoGuiUtil.clickImgNolog(reject)
+            if AutoGuiUtil.findImg(xuanshang30):
+                AutoGuiUtil.clickImg(accept)
             else:
-                AutoGuiUtil.clickImgNolog(accept)
+                AutoGuiUtil.clickImgNolog(reject)
         logger.info("多线程未发现任务")
         time.sleep(3)
 

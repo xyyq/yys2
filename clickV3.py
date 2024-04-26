@@ -63,12 +63,12 @@ def clickDouble():
     m += 100
     n += 100
 
-    for i in range(3):
+    for i in range(2):
         m = m + random.randint(-50, 50)
         n = n + random.randint(-50, 50)
         pyautogui.click(m / 2, n / 2, clicks=2, interval=0.2, duration=0.1, button="left")
         print("随机点击 {} 次".format(i + 1))
-        time.sleep(2)
+        time.sleep(1)
         # 点击屏幕中间
 
 

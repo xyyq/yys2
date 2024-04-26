@@ -55,9 +55,7 @@ def exit2topo():
 def intoTupo(position):
     print("点击突破挑战")
     time.sleep(1)
-    pyautogui.click(position.x, position.y, clicks=1,
-                    interval=0.4 + random.randint(-10, 10) / 100,
-                    duration=0.3 + random.randint(-10, 10) / 100, button="left")
+    clickposition(position)
 
     AutoGuiUtil.clickImg(jingong)
 
@@ -83,7 +81,7 @@ def getRes(currentPosition):
 def jingongs(current, tupo):
     times = 0
 
-    while times < 20:
+    while times < 5:
         res = getRes(current)
         if res != 1:
             if res == 2:
@@ -108,7 +106,9 @@ def jingongs(current, tupo):
 
 
 def clickposition(position):
-    pyautogui.click(position.x, position.y, clicks=1,
+    pyautogui.click(position.x + random.randint(-10, 10) / 2
+                    , position.y + random.randint(-10, 10) / 2
+                    , clicks=1,
                     interval=0.4 + random.randint(-10, 10) / 100,
                     duration=0.3 + random.randint(-10, 10) / 100, button="left")
 
@@ -117,7 +117,7 @@ if __name__ == '__main__':
     ## todo while没有突破券 退出
     tupoPosition = pyautogui.locateCenterOnScreen(jiejietupo, confidence=0.9)
     # if 攻破0 进4 退4
-
+    tupoPosition = pyautogui.Point(tupoPosition.x, tupoPosition.y + 10)
     firstPosition = pyautogui.Point(tupoPosition.x, tupoPosition.y + 110)
     current = firstPosition
     failTime = 0

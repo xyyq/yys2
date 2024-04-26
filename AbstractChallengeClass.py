@@ -128,7 +128,7 @@ def clickDouble():
         print("随机点击 {} 次".format(i + 1))
         time.sleep(1)
         # 点击屏幕中间
-    time.sleep(3)
+    time.sleep(1)
 
 
 def challengeSuccess(img, confidence):

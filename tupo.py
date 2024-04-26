@@ -96,6 +96,8 @@ def getRes(currentPosition):
 def jingongs(firstPosition):
     for x in range(3):
         for y in range(3):
+            if x == 2 and y == 2:
+                shuaxing(firstPosition, position)
             time.sleep(2)
             clickposition(position)
             time.sleep(1)
@@ -127,6 +129,5 @@ if __name__ == '__main__':
         time.sleep(2)
         clickposition(position)
 
-        shuaxing(firstPosition, position)
         if jingongs(firstPosition) == "fail":
             print("打不过， 算了")
