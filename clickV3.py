@@ -90,7 +90,11 @@ if __name__ == '__main__':
     challengeClass.setTimes(times)
     interval = pyautogui.prompt(text='挑战间隔', title='挑战间隔', default = 60)  # 10个按键0-9的消息弹窗
     challengeClass.setInterval(interval)
-    challengeClass.challenge()
 
+    potion = pyautogui.prompt(text='退出位置', title='退出位置', default = 60)  # 10个按键0-9的消息弹窗
+    time.sleep(5)
+    x , y = pyautogui.position()
+    challengeClass.setPoint(x, y)
+    challengeClass.challenge()
 
 

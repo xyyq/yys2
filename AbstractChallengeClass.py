@@ -22,9 +22,15 @@ class AbstractChallengeClass(ABC):
     times = 1
     interval = 100
 
+    point = pyautogui.position(0,  0)
+
+
     def setTimes(self, times):
         self.times = times
 
+
+    def setPoint(self, x , y):
+        self.point = pyautogui.position(x,  y)
     def setInterval(self, interval):
         self.interval = interval
 
@@ -46,7 +52,7 @@ class Hun11ConcreteClass(AbstractChallengeClass):
 
     def challenge(self):
         print("times:".format(self.times))
-        realChallenge(self.times, self.interval, self.getImg())
+        realChallenge(self.times, self.interval, self.getImg(), self.point)
 
     def getType(self):
         return "魂土"
@@ -61,13 +67,13 @@ class ActivityConcreteClass(AbstractChallengeClass):
     def challenge(self):
         print("times:".format(self.times))
         success = 1
-        realChallenge(self.times, self.interval, self.getImg())
+        realChallenge(self.times, self.interval, self.getImg(), self.point)
 
     def getType(self):
         return "活动"
 
     def getImg(self):
-        return "/Users/sifatasinant/Downloads/gold.jpg"
+        return "/Users/sifatasinant/Downloads/cong.PNG"
 
 
 # 子类必须实现所有抽象方法才能被实例化
@@ -128,7 +134,18 @@ def clickDouble():
         print("随机点击 {} 次".format(i + 1))
         time.sleep(1)
         # 点击屏幕中间
-    time.sleep(3)
+    time.sleep(random.randint(50, 100) * 0.03)
+
+
+
+def clickDouble(point):
+
+    for i in range(2):
+        pyautogui.click(point.x + random.randint(50,100) * 0.1 , point.y + random.randint(50,100) * 0.1, clicks=2, interval=0.2 + random.randint(1,2) * 0.1, duration=0.1, button="left")
+        print("随机点击 {} 次".format(i + 1))
+        time.sleep(random.randint(50,100) * 0.03)
+        # 点击屏幕中间
+    time.sleep(random.randint(50, 100) * 0.03)
 
 
 def challengeSuccess(img, confidence):
@@ -152,7 +169,7 @@ def challengeSuccess(img, confidence):
         return False
 
 
-def realChallenge(times, interval, img):
+def realChallenge(times, interval, img, point):
     print("times:{}".format(times))
     print("interval:{}".format(interval))
     print("img:{}".format(img))
@@ -172,7 +189,7 @@ def realChallenge(times, interval, img):
                 # 屏幕中间间隔3s点三次 保证出来
                 break
             # 挑战成功 随机点击
-            clickDouble()
+            clickDouble(point)
 
 
 def clicksImg(img, interval, confidence):
